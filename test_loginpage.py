@@ -10,11 +10,6 @@ edge_path=r"C:\Users\lavan\Downloads\edgedriver_win64\msedgedriver.exe"
 @pytest.fixture()
 def driver():
     options = Options()
-    options.add_argument("--headless")  # Run in headless mode
-    options.add_argument("--disable-gpu")  # Fixes some issues on Windows
-    options.add_argument("--window-size=1920,1080")  # Set browser resolution
-    options.add_argument("--no-sandbox")  # Required for Jenkins/Linux
-    options.add_argument("--disable-dev-shm-usage")  # Helps with memory issues
     services = Service(executable_path=edge_path)
     driver = webdriver.Edge(service=services, options=options)
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
