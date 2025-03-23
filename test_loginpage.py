@@ -10,6 +10,8 @@ edge_path=r"C:\Users\lavan\Downloads\edgedriver_win64\msedgedriver.exe"
 @pytest.fixture()
 def driver():
     options = Options()
+    options.add_argument("--disable-dev-shm-usage")  # Fix DevTools issue
+    options.add_argument("--remote-allow-origins=*")  # Prevent connection issues
     services = Service(executable_path=edge_path)
     driver = webdriver.Edge(service=services, options=options)
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
