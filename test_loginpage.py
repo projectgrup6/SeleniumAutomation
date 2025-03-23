@@ -11,9 +11,11 @@ edge_path=r"C:\Users\lavan\Downloads\edgedriver_win64\msedgedriver.exe"
 def driver():
     options = Options()
     options.add_argument("--start-maximized")  # Open in full screen
+    options.add_argument("--disable-gpu")  # Disable GPU acceleration
+    options.add_argument("--no-sandbox")  # Bypass OS security model (needed in Jenkins)
+    options.add_argument("--disable-dev-shm-usage")  # Fix crashes on Linux-based Jenkins
     options.add_argument("--remote-allow-origins=*")  # Allow remote connections
-    if "--headless" in options.arguments:
-        options.arguments.remove("--headless")
+    options.add_experimental_option("useAutomationExtension", False)  # Avoid extension issues
     services = Service(executable_path=edge_path)
     driver = webdriver.Edge(service=services, options=options)
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
