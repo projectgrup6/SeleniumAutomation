@@ -12,6 +12,8 @@ def driver():
     options = Options()
     options.add_argument("--start-maximized")  # Open in full screen
     options.add_argument("--remote-allow-origins=*")  # Allow remote connections
+    if "--headless" in options.arguments:
+        options.arguments.remove("--headless")
     services = Service(executable_path=edge_path)
     driver = webdriver.Edge(service=services, options=options)
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
